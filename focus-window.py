@@ -47,8 +47,7 @@ def focus_window(hwnd:int):
     shell.SendKeys("%")
     win32gui.SetForegroundWindow(hwnd)
 
-def main():
-    pattern = input("Masukkan regex window title yang ingin difokuskan: ").strip()
+def main(pattern: str):
     print(f"Watching for window matching: {pattern}")
     regex = re.compile(pattern, re.IGNORECASE)
 
@@ -70,5 +69,12 @@ def main():
 
 
 if __name__ == "__main__":
-  main()
+    import sys
+    if len(sys.argv) > 1 :
+        pattern = ' '.join(sys.argv[1:])
+        while True:
+            main(pattern)
+    else:
+        print("Gunakan: focus_window.exe <regex pattern window>")
+
 
